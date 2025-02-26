@@ -234,7 +234,62 @@
 
 //Providing more control
 
-import face from './face.js'
+// import face from './face.js'
+
+// const w = window.innerWidth;
+// const h = window.innerHeight;
+
+// const canvas = document.getElementById('canvas');
+
+// canvas.width = w;
+// canvas.height = h;
+
+// const ctx = canvas.getContext('2d');
+// const size = Math.min(w, h);
+// ctx.translate((w - size)/2, (h - size)/2);
+
+// const radius = size / 10;
+// ctx.translate(radius, radius);
+
+// for (const x of [0, 1, 2, 3, 4]) { 
+//     for (const y of [0, 1, 2, 3, 4]) {
+//         ctx.save();
+//         ctx.translate(2 * x * radius, 2 * y * radius);
+//         face(ctx, radius, {
+//             pupilOffset: { x: (2 - x) / 2, y: (2 - y) / 2 },
+//             eyeSize: Math.random(),
+//             eyeGap: Math.random(),
+
+//         });
+//         ctx.restore();
+//     }
+// }
+
+// Create my own canvas (stick person)
+// import person from './stick_person.js'
+
+// const canvas = document.getElementById('canvas');
+// const ctx = canvas.getContext('2d');
+// const w = window.innerWidth;
+// const h = window.innerHeight;
+
+// canvas.width = w;
+// canvas.height = h;
+// const size = Math.min(w, h);
+// const radius = size / 10;
+
+// ctx.translate(radius, radius);
+
+// for (const x of [0, 1, 2, 3, 4]) { 
+//     for (const y of [0, 1, 2, 3, 4]) {
+//         ctx.save();
+//         ctx.translate(2 * x * radius, 2 * y * radius);
+//         person(ctx, radius);
+//         ctx.restore();
+//     }
+// }
+
+import person from './stick_person.js'
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -245,22 +300,18 @@ canvas.width = w;
 canvas.height = h;
 
 const ctx = canvas.getContext('2d');
-const size = Math.min(w, h);
-ctx.translate((w - size)/2, (h - size)/2);
 
-const radius = size / 10;
-ctx.translate(radius, radius);
+const radius = Math.min(w, h) / 4;
 
-for (const x of [0, 1, 2, 3, 4]) { 
-    for (const y of [0, 1, 2, 3, 4]) {
-        ctx.save();
-        ctx.translate(2 * x * radius, 2 * y * radius);
-        face(ctx, radius, {
-            pupilOffset: { x: (2 - x) / 2, y: (2 - y) / 2 },
-            eyeSize: Math.random(),
-            eyeGap: Math.random(),
+// One in the middle
+ctx.translate(w / 2, h / 2);
+person(ctx, radius);
 
-        });
-        ctx.restore();
-    }
+// eight around the outside
+for (const angle of [0, 1, 2, 3, 4, 5, 6, 7]) {
+    ctx.save();
+    ctx.rotate(angle * Math.PI / 4);
+    ctx.translate(0, -radius * 1.5);
+    person(ctx, radius / 2);
+    ctx.restore()    
 }
