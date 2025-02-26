@@ -12,3 +12,4 @@ export default function person(ctx, radius){
     ctx.stroke();
     ctx.restore();
 }
+

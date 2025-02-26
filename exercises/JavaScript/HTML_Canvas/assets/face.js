@@ -59,3 +59,4 @@ function eye(ctx, radius, {pupilOffset = {X: 0, y: 0}}) {
     ctx.fill();
     ctx.restore();
 }
+
